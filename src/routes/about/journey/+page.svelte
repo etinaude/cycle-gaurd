@@ -1,6 +1,5 @@
 <script>
 	import { MapLibre, DefaultMarker, Popup, GeoJSON, LineLayer } from 'svelte-maplibre';
-	import { fade } from 'svelte/transition';
 
 	let mapClasses = '';
 	let markers = [
@@ -40,44 +39,6 @@
 			}
 		]
 	};
-
-	let showSplash = true;
-	let angle = 120;
-
-	setInterval(() => {
-		angle++;
-		console.log(angle);
-	}, 100);
-
-	setInterval(() => {
-		showSplash = false;
-	}, 3000);
-
-	let socket = new WebSocket('wss://javascript.info/article/websocket/demo/hello');
-
-	socket.onopen = function (e) {
-		console.log('[open] Connection established');
-		console.log('Sending to server');
-		socket.send('My name is John');
-	};
-
-	socket.onmessage = function (event) {
-		console.log(`[message] Data received from server: ${event.data}`);
-	};
-
-	socket.onclose = function (event) {
-		if (event.wasClean) {
-			console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-		} else {
-			// e.g. server process killed or network down
-			// event.code is usually 1006 in this case
-			console.log('[close] Connection died');
-		}
-	};
-
-	socket.onerror = function (error) {
-		console.log(`[error]`);
-	};
 </script>
 
 <svelte:head>
@@ -114,56 +75,71 @@
 	</GeoJSON>
 </MapLibre>
 
-<div class="compass">
-	<div class="compass__arrow" style={'rotate:' + angle + 'deg'}></div>
-</div>
+<!-- <div class="back-arrow">
+	<a href="/about" class="back-btn">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			class="h-6 w-6"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke="currentColor"
+		>
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+		</svg>
+	</a>
+</div> -->
 
-{#if showSplash}
-	<div class="splash" transition:fade={{ delay: 250, duration: 300 }}>
-		<h1>Loading...</h1>
+<div class="draw">
+	<h1>Morning Cycle to Uni</h1>
+	<div class="draw-body">
+		<div class="text-column">
+			<p><b>Distance:</b> 1.64km</p>
+			<p><b>Time:</b> 10:05</p>
+			<p><b>kCal:</b> 2001</p>
+		</div>
+		<div class="text-column">
+			<p><b>Date:</b> 21/09/24</p>
+			<p><b>Close Calls:</b> 4</p>
+			<p><b>Elevation:</b> 20m</p>
+		</div>
 	</div>
-{/if}
+</div>
 
 <style>
 	:global(.map) {
 		height: 500px;
 	}
 
-	.compass {
+	.draw {
 		position: absolute;
-		bottom: 30px;
-		right: 10px;
-		width: 70px;
-		height: 70px;
-		background-color: white;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		display: flex;
+		height: 300px;
+		background: #fff;
+		border-radius: 30px 20px 0 0;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		flex-direction: column;
+	}
+
+	.draw-body {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		justify-content: center;
+		text-align: center;
+	}
+
+	.back-arrow {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		z-index: 100;
+		width: 50px;
+		height: 50px;
+		background: #fff;
 		border-radius: 50%;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-		z-index: 5;
-	}
-
-	.compass__arrow {
-		width: 0;
-		height: 0;
-		border-left: 20px solid transparent;
-		border-right: 20px solid transparent;
-		border-top: 20px solid #586f7c;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		translate: -50% -50%;
-		transform-origin: 50% 50%;
-	}
-
-	.splash {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		background-color: #fff;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		z-index: 999;
 	}
 </style>

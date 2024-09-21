@@ -4,31 +4,31 @@
 	let data = [
 		{
 			date: '21/09/2024',
-			text: 'Morning Bike ride to Uni',
+			text: 'Morning Cycle to Uni',
 			map: route1,
 			time: '10:05'
 		},
 		{
 			date: '20/09/2024',
-			text: 'Morning Bike ride Home',
+			text: 'Morning Cycle Home',
 			map: route1,
 			time: '11:24'
 		},
 		{
 			date: '21/09/2024',
-			text: 'Morning Bike ride to Uni',
+			text: 'Morning Cycle to Uni',
 			map: route1,
 			time: '11:24'
 		},
 		{
 			date: '20/09/2024',
-			text: 'Morning Bike ride Home',
+			text: 'Morning Cycle Home',
 			map: route1,
 			time: '11:24'
 		},
 		{
 			date: '21/09/2024',
-			text: 'Morning Bike ride to Uni',
+			text: 'Morning Cycle to Uni',
 			map: route1,
 			time: '11:24'
 		},
@@ -62,7 +62,7 @@
 	<h1>Previous routes</h1>
 
 	{#each data as { date, text, map, time }}
-		<a href="/" class="card">
+		<a href="/about/journey" class="card">
 			<div class="map">
 				<img src={map} alt="Map" />
 			</div>
